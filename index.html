@@ -25,7 +25,7 @@
 const terminal = document.getElementById("terminal");
 
 // ---------------- Funções utilitárias ----------------
-function escrever(msg, velocidade=10) {
+function escrever(msg, velocidade=1) { // antes 10 ou 2
     return new Promise(resolve => {
         let i = 0;
         function loop() {
@@ -51,12 +51,8 @@ function limpar() {
 // ---------------- Caveira piscando ----------------
 async function caveira() {
     const skull = [
+
 `░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█░██░██░██░██░██░██░██░██░██░░░░░░░░░░█
-█░██░██░██░██░██░██░██░██░██░░░░░░░░░░█
-█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░█░░░░█▀▀▀█░█▀▀█░█▀▀▄░▀█▀░█▄░░█░█▀▀█░░
 ░░█░░░░█░░░█░█▄▄█░█░░█░░█░░█░█░█░█░▄▄░░
 ░░█▄▄█░█▄▄▄█░█░░█░█▄▄▀░▄█▄░█░░▀█░█▄▄█░░
@@ -64,10 +60,10 @@ async function caveira() {
     ];
     for(let _=0; _<1; _++) {
         limpar();
-        await escrever(skull.join("\n"), 2);
-        await new Promise(r => setTimeout(r, 200));
+        await escrever(skull.join("\n"), 1); // mais rápido
+        await new Promise(r => setTimeout(r, 50)); // antes 200
         limpar();
-        await new Promise(r => setTimeout(r, 100));
+        await new Promise(r => setTimeout(r, 25)); // antes 100
     }
 }
 
@@ -79,7 +75,7 @@ async function matrix_efeito(linhas=5, colunas=5, tempo=0) {
         for(let i=0; i<colunas; i++){
             linha += chars[Math.floor(Math.random()*chars.length)];
         }
-        await escrever(linha, tempo);
+        await escrever(linha, tempo); // tempo já rápido
     }
 }
 
@@ -97,7 +93,7 @@ async function mostrar_nayler_rita() {
 "                                                                               "
     ];
     limpar();
-    await escrever(ascii_art.join("\n"), 2);
+    await escrever(ascii_art.join("\n"), 1);
 }
 
 // ---------------- HACKEADO ----------------
@@ -116,27 +112,27 @@ async function mostrar_hackeado() {
     for(let _=0; _<1; _++) {
         limpar();
         await escrever(hackeado_ascii.join("\n"), 1);
-        await new Promise(r => setTimeout(r, 200));
+        await new Promise(r => setTimeout(r, 50)); // antes 200
         limpar();
-        await new Promise(r => setTimeout(r, 100));
+        await new Promise(r => setTimeout(r, 25)); // antes 100
     }
-    await escrever(hackeado_ascii.join("\n"), 2);
+    await escrever(hackeado_ascii.join("\n"), 1);
 }
 
 // ---------------- Sequência principal ----------------
 async function rodar() {
     await caveira();
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 50)); // antes 500
     for(let i=0; i<5; i++){
-        await matrix_efeito(10, 80, 10);
+        await matrix_efeito(10, 80, 0);
     }
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 50)); // antes 500
     await mostrar_nayler_rita();
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 50)); // antes 1000
     await mostrar_hackeado();
-    await escrever("PROCESSO CONCLUÍDO 💀 SEU CELULAR FOI INVADIDO!", 20);
-    await escrever("VOCÊ ME DEVE 💀 UMA CERVEJA!", 20);
-    await escrever("BRI N CA DE I RA !", 50);
+    await escrever("PROCESSO CONCLUÍDO 💀 SEU CELULAR FOI INVADIDO!", 5);
+    await escrever("VOCÊ ME DEVE 💀 UMA CERVEJA!", 5);
+    await escrever("BRI N CA DE I RA !", 20);
 }
 
 rodar();
